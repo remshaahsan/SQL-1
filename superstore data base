@@ -1,0 +1,22 @@
+SELECT *
+FROM superstore
+ORDER BY price DESC;
+
+SELECT SUM(price)
+FROM superstore; 
+
+SELECT AVG(price)
+FROM superstore; 
+
+SELECT MIN(price)
+FROM superstore; 
+
+SELECT MAX(price)
+FROM superstore; 
+
+SELECT COUNT(price)
+FROM superstore; 
+
+SELECT item_name, price
+FROM superstore
+WHERE item_name = 'Kitchen Supplies' 
