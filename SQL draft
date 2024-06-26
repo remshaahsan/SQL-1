@@ -1,0 +1,201 @@
+SELECT 
+
+FROM 
+
+WHERE  
+
+A table is created in two queries:
+
+1. CREATE TABLE: Builds the table structure
+2. INSERT INTO: Adds data to the table 
+
+CREATE TABLE salaries (
+employee_id INTEGER
+, department TEXT
+, salary INTEGER
+); 
+
+
+In the second step, data is added one row at a time, with commas inside the parentheses indicating a new column, like this:
+
+MYSQL
+CREATE TABLE salaries (
+employee_id INTEGER
+, department TEXT
+, salary INTEGER
+);
+
+INSERT INTO salaries (employee_id, department, salary) VALUES
+(195074, 'IT', 82000),
+(250199, 'management', 112000); 
+
+
+SELECT: selects a column or columns from a table
+FROM: tells SQL what table we want data from
+WHERE: filters results
+ORDER BY: orders results
+ASC (ascending: 1, 2, 3; a, b, c)
+this is the default, meaning that if you just write ORDER BY, it will use ascending
+DESC (descending: 3, 2, 1; c, b, a) 
+
+What do commas do?
+
+In SQL, commas indicate a new column (aka “comma-separated values” or csv).
+
+For example, in the following INSERT statement, you can see three different data points divided by two commas. This means that this data is inserted into three different columns:
+
+('195074', 'IT', 82000)  
+
+
+
+ The SQL query on the left has the comma after the column name (trailing), and the SQL query on the right has commas that go before the column name (leading). 
+
+- Trailing-comma fans say it looks more like natural language, with commas at the end of the thought.
+- Leading-comma fans argue it helps them make fewer errors and to remember to put in their punctuation.
+
+Comma Comparison
+Trailing Commas	Leading Commas
+SELECT name,
+employee_id,
+city
+FROM employees
+WHERE city ='Lansing';
+
+SELECT name
+, employee_id
+, city
+FROM employees
+WHERE city ='Lansing' 
+
+
+
+
+
+MYSQL
+SELECT _____
+FROM superstore
+WHERE ____
+ORDER BY _____; 
+
+
+
+
+
+
+
+**Schema (MySQL v5.7)**
+
+    CREATE TABLE superstore (
+        item_id INTEGER PRIMARY KEY,
+        item_name TEXT,
+        category TEXT,
+        price DECIMAL(10, 2),
+        stock_quantity INTEGER,
+        average_rating DECIMAL(3, 2)
+    );
+    
+    INSERT INTO superstore (item_id, item_name, category, price, stock_quantity, average_rating)
+    VALUES
+        (1, 'Stainless Steel Cookware Set', 'Kitchen Supplies', 89.99, 50, 4.6),
+        (2, 'Memory Foam Mattress', 'Furnishings', 499.99, 30, 4.8),
+        (3, 'Smart LED TV', 'Electronics', 549.00, 20, 4.5),
+        (4, 'Robot Vacuum Cleaner', 'Appliances', 199.50, 40, 4.3),
+        (5, 'Wireless Bluetooth Speaker', 'Electronics', 39.99, 60, 4.2),
+        (6, 'Non-Stick Baking Set', 'Kitchen Supplies', 29.95, 80, 4.4),
+        (7, 'Cotton Bedding Set', 'Furnishings', 89.00, 25, 4.7),
+        (8, 'Smart Home Security Camera', 'Electronics', 79.95, 15, 4.1),
+        (9, 'Air Purifier', 'Appliances', 129.50, 35, 4.6),
+        (10, 'Premium Coffee Maker', 'Kitchen Supplies', 79.99, 50, 4.9),
+        (11, 'Ergonomic Office Chair', 'Furnishings', 189.00, 20, 4.5),
+        (12, 'Wireless Earbuds', 'Electronics', 49.99, 75, 4.3),
+        (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
+        (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
+        (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
+    
+
+---
+
+**Query #1**
+
+    SELECT *
+    FROM superstore
+    ORDER BY price DESC;
+
+| item_id | item_name                    | category         | price  | stock_quantity | average_rating |
+| ------- | ---------------------------- | ---------------- | ------ | -------------- | -------------- |
+| 3       | Smart LED TV                 | Electronics      | 549.00 | 20             | 4.50           |
+| 2       | Memory Foam Mattress         | Furnishings      | 499.99 | 30             | 4.80           |
+| 4       | Robot Vacuum Cleaner         | Appliances       | 199.50 | 40             | 4.30           |
+| 11      | Ergonomic Office Chair       | Furnishings      | 189.00 | 20             | 4.50           |
+| 9       | Air Purifier                 | Appliances       | 129.50 | 35             | 4.60           |
+| 1       | Stainless Steel Cookware Set | Kitchen Supplies | 89.99  | 50             | 4.60           |
+| 7       | Cotton Bedding Set           | Furnishings      | 89.00  | 25             | 4.70           |
+| 10      | Premium Coffee Maker         | Kitchen Supplies | 79.99  | 50             | 4.90           |
+| 8       | Smart Home Security Camera   | Electronics      | 79.95  | 15             | 4.10           |
+| 12      | Wireless Earbuds             | Electronics      | 49.99  | 75             | 4.30           |
+| 13      | Slow Cooker                  | Appliances       | 49.95  | 30             | 4.70           |
+| 5       | Wireless Bluetooth Speaker   | Electronics      | 39.99  | 60             | 4.20           |
+| 14      | Cutlery Set                  | Kitchen Supplies | 34.50  | 40             | 4.40           |
+| 6       | Non-Stick Baking Set         | Kitchen Supplies | 29.95  | 80             | 4.40           |
+| 15      | Cozy Throw Blanket           | Furnishings      | 24.99  | 100            | 4.20           |
+
+---
+**Query #2**
+
+    SELECT SUM(price)
+    FROM superstore;
+
+| SUM(price) |
+| ---------- |
+| 2135.29    |
+
+---
+**Query #3**
+
+    SELECT AVG(price)
+    FROM superstore;
+
+| AVG(price) |
+| ---------- |
+| 142.352667 |
+
+---
+**Query #4**
+
+    SELECT MIN(price)
+    FROM superstore;
+
+| MIN(price) |
+| ---------- |
+| 24.99      |
+
+---
+**Query #5**
+
+    SELECT MAX(price)
+    FROM superstore;
+
+| MAX(price) |
+| ---------- |
+| 549.00     |
+
+---
+**Query #6**
+
+    SELECT COUNT(price)
+    FROM superstore;
+
+| COUNT(price) |
+| ------------ |
+| 15           |
+
+---
+**Query #7**
+
+    SELECT item_name, price
+    FROM superstore
+    WHERE item_name = 'Kitchen Supplies';
+
+There are no results to be displayed.
+
+---
