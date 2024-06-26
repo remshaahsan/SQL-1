@@ -1,0 +1,54 @@
+SELECT *
+,ROUND(avg_employee_tenure*100,2) as avg_employee_percentage 
+FROM fortune_companies; 
+
+SELECT *
+,ROUND(avg_employee_tenure*100,2) as avg_employee_percentage 
+FROM fortune_companies 
+GROUP BY industry 
+HAVING SUM(revenue)>150; 
+
+SELECT *
+,ROUND(avg_employee_tenure*100,2) as avg_employee_percentage 
+FROM fortune_companies 
+ORDER BY paid_time_off_days DESC; 
+
+SELECT *
+,ROUND(avg_employee_tenure*100,2) as avg_employee_percentage 
+FROM fortune_companies 
+ORDER BY maternity_leave_weeks DESC; 
+
+SELECT *
+FROM fortune_companies 
+WHERE industry = "Technology" OR industry = "Retail" 
+ORDER BY  industry
+
+SELECT industry, SUM(revenue)
+FROM fortune_companies 
+GROUP BY industry;
+
+SELECT industry, MAX(revenue)
+FROM fortune_companies 
+GROUP BY industry;
+
+SELECT industry, MIN(revenue)
+FROM fortune_companies 
+GROUP BY industry; 
+
+SELECT industry, AVG(revenue)
+FROM fortune_companies 
+GROUP BY industry; 
+
+
+SELECT *
+,ROUND(avg_employee_tenure*100,2) as avg_tenure_percentage
+FROM fortune_companies 
+ORDER BY avg_tenure_percentage DESC; 
+
+SELECT COUNT(*), 
+CASE WHEN avg_employee_tenure >= 7.1 THEN "710"
+WHEN avg_employee_tenure >= 6.1 THEN "610"
+WHEN avg_employee_tenure >= 5.1 THEN "510" 
+ELSE "Under 510" END AS "tenure"
+FROM fortune_companies  
+GROUP BY tenure;
